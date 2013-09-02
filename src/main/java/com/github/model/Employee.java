@@ -5,8 +5,12 @@
 package com.github.model;
 
 import java.util.Date;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeMap;
+import org.apache.commons.lang3.Range;
 
 /**
  *
@@ -18,7 +22,7 @@ public class Employee {
         PAYROLLED,
         NONPAYROLLED
     }
-    public List<TimeCard> timeCards = new LinkedList<TimeCard>();
+    public TreeMap<Long,Range> timeCards = new TreeMap<Long,Range>();
     public String firstName;
     public String lastName;
     public String username;
@@ -36,4 +40,9 @@ public class Employee {
     
     public boolean admin;
     
+    public static class Range {
+        public long endDate;
+        public TimeCard timecard;
+    }
+
 }

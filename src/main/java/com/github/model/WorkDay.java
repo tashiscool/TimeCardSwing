@@ -17,5 +17,6 @@ import org.apache.commons.lang3.tuple.MutablePair;
 public class WorkDay {
    public int dayOfWeek = 0;
    public List<MutablePair<Date,Date>> timeInOut = new LinkedList<MutablePair<Date, Date>>();
+   public Date dateWorked;
             
 }
