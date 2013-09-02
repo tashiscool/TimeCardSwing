@@ -162,6 +162,53 @@ public class EmployeeController {
         }
         if (lastpair.right != null)
             currentWorkDay.timeInOut.add(new MutablePair<Date, Date>(Calendar.getInstance().getTime(),null));
+    }
+    static void EmployeePunchOut(Employee employee) {
+        Long key = Calendar.getInstance().getTimeInMillis();
+        Map.Entry<Long, Employee.Range> entry = employee.timeCards.floorEntry(key);
+        TimeCard currentTimeCard = null;
+//        if (entry == null) {
+//            // too small
+//            //prolly new employee so create a timecard for this range
+//            
+//            
+//        } else if (key <= entry.getValue().endDate) {
+//           currentTimeCard  = entry.getValue().timecard;
+//        } else {
+//            // too large or in a hole
+//        }
+
+        //get a 2 week Timecard OR create a two week time card
+        
+        //TODO: use vistor pattern
+        if (key <= entry.getValue().endDate) {
+           currentTimeCard  = entry.getValue().timecard;
+        }
+        else
+        {
+//            Pair<Long, Long> range = DateUtils.getCurrentTwoWeekPeriod();
+//            currentTimeCard = new TimeCard();
+//            currentTimeCard.startDay = new Date(range.getLeft());
+//            currentTimeCard.endDay = new Date(range.getRight());
+//            
+//            Employee.Range currentRange = new Employee.Range();
+//            currentRange.endDate = currentTimeCard.endDay.getTime();
+//            employee.timeCards.put(currentTimeCard.startDay.getTime(), currentRange);
+            throw new RuntimeException("Can't Punch out you. never Punched in");
+        }
+        //enter WorkDay Time
+        WorkDay currentWorkDay = currentTimeCard.workedDays
+                .get(Calendar.getInstance().get(Calendar.DAY_OF_YEAR));
+        
+        if (currentWorkDay == null)
+        {
+            throw new RuntimeException("Can't Punch out you. never Punched in Today!");            
+        }
+        MutablePair<Date, Date> lastpair = null;
+        for (MutablePair<Date, Date> time : currentWorkDay.timeInOut) {
+            lastpair = time;
+        }
+        lastpair.right = Calendar.getInstance().getTime() ;
         
         
         
