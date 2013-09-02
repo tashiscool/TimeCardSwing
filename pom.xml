@@ -78,5 +78,10 @@
             <artifactId>json-simple</artifactId>
             <version>1.1.1</version>
         </dependency>
+        <dependency>
+            <groupId>org.opensaml</groupId>
+            <artifactId>opensaml</artifactId>
+            <version>2.5.1-1</version>
+	</dependency>
     </dependencies>
 </project>
